@@ -1,0 +1,5 @@
+.xmake
+.luajit_pro/
+.vscode/
+build/
+*.log
