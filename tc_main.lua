@@ -1,11 +1,8 @@
-local reset = require("verilua.utils.StaticQueue").reset
----@diagnostic disable: undefined-global, undefined-field
-
 local env = (require "env") --[[@as test_template.Env]]
 local tc_name = assert(os.getenv "TC_NAME", "failed to get TC_NAME")
 
 -- ============================================================
--- 主函数（无需修改）
+-- 主函数
 -- ============================================================
 fork {
     main_task = function()
