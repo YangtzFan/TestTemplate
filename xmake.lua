@@ -1,12 +1,32 @@
 ---@diagnostic disable: undefined-global, undefined-field
 
 local prj_dir = os.curdir()
-local build_dir = path.join(prj_dir, "build") 
-local rtl_dir = path.join(build_dir, "rtl")   -- TODO: 修改为实际 RTL 目录
+local build_dir = path.join(prj_dir, "build")
+local rtl_dir = path.join(build_dir, "rtl")
+local ChiselTemplate_dir = path.join(prj_dir, "ChiselTemplate")
 local src_dir = path.join(prj_dir, "src")
 local tc_dir  = path.join(prj_dir, "test_cases")
 
 local sim = os.getenv "SIM" or "vcs" -- 默认使用 VCS 仿真器
+
+-- ============================================================================
+-- target: rtl —— 将 ChiselTemplate 中的 Chisel 源码编译为 SystemVerilog 并复制到 rtl_dir
+-- ============================================================================
+target("rtl", function()
+    set_kind("phony")
+    set_default(false)
+    on_run(function()
+        local ct_build_dir = path.join(ChiselTemplate_dir, "build", "rtl")
+        os.cd(ChiselTemplate_dir)
+        os.execv("mill", {"-i", "chiselTemplate.runMain", "template.GenerateVerilog",
+            "--target", "systemverilog", "--split-verilog", "-td", ct_build_dir})
+
+        os.tryrm(rtl_dir)
+        os.mkdir(rtl_dir)
+        os.cp(path.join(ct_build_dir, "*"), rtl_dir)
+        cprint("${green underline}[INFO]${clear} RTL 已复制到 build/rtl/")
+    end)
+end)
 
 -- ============================================================================
 -- target: sim —— 主仿真入口
