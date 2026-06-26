@@ -1,0 +1,3 @@
+[submodule "ChiselTemplate"]
+	path = ChiselTemplate
+	url = git@github.com:YangtzFan/ChiselTemplate.git
