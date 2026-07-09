@@ -3,3 +3,7 @@
 .vscode/
 build/
 *.log
+verdiLog/
+novas.conf
+novas.rc
+.metals/
