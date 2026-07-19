@@ -53,9 +53,32 @@ target("sim", function()
         path.join(rtl_dir, "verification", "cover", "*.sv")
     )
 
-    add_values("vcs.flags", "+incdir+" .. path.join(rtl_dir, "verification"))
-    set_values("cfg.build_dir_name", "sim")
+    set_values("cfg.build_dir_name", "sim")     -- 仿真 testbench 文件所生成的目录名
     set_values("cfg.top", "Top")      -- TODO: 修改为实际顶层模块名
+    add_values("cfg.tb_gen_flags", 
+        "+incdir+" .. path.join(rtl_dir, "verification"),
+        "+incdir+" .. path.join(rtl_dir, "verification", "assert"),
+        "+incdir+" .. path.join(rtl_dir, "verification", "assume"),
+        "+incdir+" .. path.join(rtl_dir, "verification", "cover"),
+        "--single-unit"
+    )
+
+    add_values("vcs.flags", "+define+ASSERT_VERBOSE_CO0_test_for_smokeND_=1", "+define+STOP_COND_=1")
+    add_values("vcs.flags",
+        "+incdir+" .. path.join(rtl_dir, "verification"),
+        "+incdir+" .. path.join(rtl_dir, "verification", "assert"),
+        "+incdir+" .. path.join(rtl_dir, "verification", "assume"),
+        "+incdir+" .. path.join(rtl_dir, "verification", "cover")
+    )
+
+    add_values("verilator.flags", "+define+ASSERT_VERBOSE_CO0_test_for_smokeND_=1", "+define+STOP_COND_=1")
+    add_values("verilator.flags",
+        "+incdir+" .. path.join(rtl_dir, "verification"),
+        "+incdir+" .. path.join(rtl_dir, "verification", "assert"),
+        "+incdir+" .. path.join(rtl_dir, "verification", "assume"),
+        "+incdir+" .. path.join(rtl_dir, "verification", "cover"),
+        "--trace", "--no-trace-top", "--threads 4"
+    )
 
     local TC = os.getenv("TC") -- 根据用户设置的 TC 寻找对应的用例并将名称存入 TC_NAME 环境变量
     if TC then
@@ -71,7 +94,7 @@ target("sim", function()
         end
     end
 
-    set_values("cfg.lua_main", "tc_main.lua")
+    set_values("cfg.lua_main", "tc_main.lua") -- Lua 主脚本执行入口
 end)
 
 -- ============================================================================
