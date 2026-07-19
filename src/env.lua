@@ -91,15 +91,15 @@ end
 ---@param a integer
 ---@param b integer
 local function set_input(a, b)
-    dut.u_Top.io_a_bits:set(a)
-    dut.u_Top.io_b_bits:set(b)
-    dut.u_Top.io_a_valid:set(1)
-    dut.u_Top.io_b_valid:set(1)
+    dut.io_a_bits:set(a)
+    dut.io_b_bits:set(b)
+    dut.io_a_valid:set(1)
+    dut.io_b_valid:set(1)
 end
 
 local function unset_input()
-    dut.u_Top.io_a_valid:set(0)
-    dut.u_Top.io_b_valid:set(0)
+    dut.io_a_valid:set(0)
+    dut.io_b_valid:set(0)
 end
 
 local function test_success()

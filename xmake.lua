@@ -15,7 +15,7 @@ local sim = os.getenv "SIM" or "vcs" -- 默认使用 VCS 仿真器
 target("rtl", function()
     set_kind("phony")
     set_default(false)
-    on_run(function()
+    on_build(function()
         local ct_build_dir = path.join(ChiselTemplate_dir, "build", "rtl")
         os.cd(ChiselTemplate_dir)
         os.execv("mill", {"-i", "chiselTemplate.runMain", "template.GenerateVerilog",

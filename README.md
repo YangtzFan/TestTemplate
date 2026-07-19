@@ -33,32 +33,28 @@ git submodule update --init
 将 Chisel 编译为 SystemVerilog 并复制到 `build/rtl/`：
 
 ```bash
-xmake run rtl
+xmake build rtl
 ```
 
 ### 3. 运行仿真
 
 ```bash
-# 默认运行 TC=000（冒烟用例）
-xmake build sim
-xmake run sim
+# 默认仿真器 VCS 
+xmake build sim # 编译得到 testbench 文件
+xmake run sim # 默认运行 TC=000（冒烟用例）
+TC=001 xmake run sim
+TC=002 xmake run sim
 
-# 指定用例
-TC=001 xmake build sim && TC=001 xmake run sim
-TC=002 xmake build sim && TC=002 xmake run sim
+# 修改仿真器为 verilator
+SIM=verilator xmake build sim # 编译得到 testbench 文件
+SIM=verilator xmake run sim # 默认运行 TC=000（冒烟用例）
+SIM=verilator TC=001 xmake run sim
+SIM=verilator TC=002 xmake run sim
 ```
 
 用例编号取 `test_cases/` 下文件名的前三位数字。
 
-### 4. 切换仿真器
-
-默认使用 VCS，可通过环境变量切换为 Verilator：
-
-```bash
-SIM=verilator xmake build sim && SIM=verilator xmake run sim
-```
-
-### 5. 清理构建产物
+### 4. 清理构建产物
 
 ```bash
 xmake run clean
