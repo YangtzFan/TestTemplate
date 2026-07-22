@@ -121,4 +121,4 @@ TC=000 xmake r sim
 
 ### 修改 RTL
 
-编辑 `ChiselTemplate/src/` 下的 Scala 源码后，重新运行 `xmake run rtl` 再重新编译仿真即可。
+编辑 `ChiselTemplate/src/` 下的 Scala 源码后，重新运行 `xmake build rtl` 再重新编译仿真即可。
