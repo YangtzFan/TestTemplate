@@ -1,6 +1,6 @@
 # TestTemplate
 
-基于 [Verilua](https://github.com/cyril0124/verilua) 的 UVM 硬件验证模板工程，支持 VCS 和 Verilator 两种仿真器。RTL 由 [ChiselTemplate](https://github.com/YangtzFan/ChiselTemplate) 子模块生成，验证逻辑用 Lua 编写。
+基于 [Verilua](https://github.com/cyril0124/verilua) 的硬件验证模板工程，支持 VCS 和 Verilator 两种仿真器。RTL 由 [ChiselTemplate](https://github.com/YangtzFan/ChiselTemplate) 子模块生成，验证逻辑用 Lua 编写。
 
 ## 目录结构
 
