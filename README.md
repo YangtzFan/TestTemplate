@@ -16,7 +16,7 @@ TestTemplate/
 │   ├── 000_smoke.lua   # 冒烟用例：验证后 0+0
 │   ├── 001_one_add_one.lua  # 用例：验证 1+1=2
 │   └── 002_random.lua  # 用例：随机输入 10 拍
-├── tc_main.lua         # Verilua 入口
+├── main.lua            # Verilua 入口
 └── xmake.lua           # 构建脚本
 ```
 
@@ -74,13 +74,13 @@ TC=000 xmake r sim
 ├─ [xmake] 调用已编译的 simv（VCS 仿真二进制）
 │
 ├─ [VCS/simv] 加载 libverilua_vcs.so，Verilua 初始化 Lua 运行时
-│   └─ 入口：tc_main.lua
+│   └─ 入口：main.lua
 │
-├─ [tc_main.lua] require "env"
+├─ [main.lua] require "env"
 │   └─ env.lua 初始化 DUT 信号句柄（clock、input_a/b、output_sum）
 │       并构造 TestTemplateMonitor 实例
 │
-├─ [tc_main.lua] fork { main_task }  ← 创建主协程
+├─ [main.lua] fork { main_task }  ← 创建主协程
 │
 ├─ [main_task] require(TC_NAME)  →  加载 000_smoke.lua
 │              得到 tc.tasks = { task_single }

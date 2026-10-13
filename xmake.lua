@@ -94,7 +94,7 @@ target("sim", function()
         end
     end
 
-    set_values("cfg.lua_main", "tc_main.lua") -- Lua 主脚本执行入口
+    set_values("cfg.lua_main", "main.lua") -- Lua 主脚本执行入口
 end)
 
 -- ============================================================================
