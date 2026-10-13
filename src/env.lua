@@ -8,7 +8,7 @@ local random = math.random
 
 local clock = dut.clock:chdl()
 
-local hier = "tb_top.u_Top" --[[@type string]]
+local hier = "tb_top" --[[@type string]]
 local prefix = "io_" --[[@type string]]
 
 ---@type verilua.handles.AliasBundle
