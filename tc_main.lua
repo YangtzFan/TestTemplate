@@ -15,9 +15,8 @@ fork {
         env.dut_reset()
         env.launch_monitor_task()
 
-        for _, task in ipairs(tc.tasks) do
-            task()
-        end
+        tc()
+
         env.test_success()
         sim.finish()
     end

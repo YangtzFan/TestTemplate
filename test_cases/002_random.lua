@@ -12,11 +12,6 @@ local function task_random()
     end
 end
 
----@type test_template.TestCase
-local tc = {
-    tasks = {
-        task_random
-    }
-}
-
-return tc
+return function()
+    task_random()
+end

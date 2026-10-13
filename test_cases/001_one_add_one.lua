@@ -8,11 +8,6 @@ local function task_1()
     clock:posedge()
 end
 
----@type test_template.TestCase
-local tc = {
-    tasks = {
-        task_1
-    }
-}
-
-return tc
+return function ()
+    task_1()
+end
